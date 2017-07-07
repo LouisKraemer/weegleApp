@@ -8,12 +8,15 @@
 </ion-header>
 
 <ion-content padding>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
     <ion-fab bottom right>
         <button ion-fab (click)="addClicked()"><ion-icon name="add"></ion-icon></button>
     </ion-fab>
 
     <ion-list>
-        <ion-card *ngFor="let person of user">
+        <ion-card *ngFor="let person of user" (press)="presentActionSheet($event)" id={{person._id}}>
             <ion-card-header>
                 {{person.lastName}} {{person.firstName}}
             </ion-card-header>

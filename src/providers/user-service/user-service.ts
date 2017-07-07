@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import {Observable} from 'rxjs/Rx';
+import { Http, Headers, RequestOptions } from '@angular/http';
+//import {Observable} from 'rxjs/Rx';
 
 import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
+//import 'rxjs/add/operator/catch';
 
 /*
   Generated class for the UserServiceProvider provider.
@@ -15,38 +15,52 @@ import 'rxjs/add/operator/catch';
 export class UserServiceProvider {
     
     private apiUrl = 'http://localhost:3000/api';
+//    private apiUrl = 'http://server-weegle.herokuapp.com/api';
     data: any;
 
   constructor(public http: Http) {
 //    console.log('Hello UserServiceProvider Provider');
   }
     
-//    getUsers() {
+    getUsers() {
 //        if (this.data) {
 //            return Promise.resolve(this.data);
 //        }
-//        
-//        return new Promise(resolve => {
-//            this.http.get(this.apiUrl + '/users')
-//                .map(res => res.json())
-//                .subscribe(data => {
-//                this.data = data;
-//                resolve(this.data);
-//            })
-//        })
-//    }
-
-    getUsers() : Observable<any> {
-        return this.http.get(this.apiUrl + '/users')
-            .map((res:Response) => res.json())
-            .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+        
+        return new Promise(resolve => {
+            this.http.get(this.apiUrl + '/users')
+                .map(res => res.json())
+                .subscribe(data => {
+                this.data = data;
+                resolve(this.data);
+            })
+        })
     }
-
-    addUser(user) {
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
-        this.http.post(this.apiUrl + '/users', user, options)
-            .map(res => res.json())
+    
+    addUser(lastName, firstName, coming) {
+        var data = {
+            lastName: lastName,
+            firstName: firstName,
+            coming: coming
+        }
+        return new Promise((resolve, reject) => {
+            this.http.post(this.apiUrl+'/users', data)
+            .subscribe(res => {
+                resolve(res);
+            }, (err) => {
+                reject(err);
+            });
+        });
     }
-
+    
+    deleteUser(userId) {
+        return new Promise((resolve, reject) => {
+            this.http.delete(this.apiUrl + '/users/' + userId)
+            .subscribe(res => {
+                resolve(res);
+            }, (err) => {
+                reject(err);
+            })
+        })
+    }
 }

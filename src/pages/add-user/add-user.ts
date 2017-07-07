@@ -23,13 +23,16 @@ export class AddUserPage {
   }
 
     addUser() {
-        var newUser = {
-            lastname: this.lastName,
-            firstName: this.firstName,
-            coming: this.coming
-        }
-//        this.userService.addUser(newUser);
-        console.log(newUser)
+//        var newUser = {
+//            lastname: this.lastName,
+//            firstName: this.firstName,
+//            coming: this.coming
+//        }
+        this.userService.addUser(this.lastName, this.firstName, this.coming).then((result) => {
+            console.log(result);
+        }, (err) => {
+            console.log(err);
+        })
         this.navCtrl.pop();
     }
 
