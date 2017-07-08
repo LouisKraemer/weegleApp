@@ -21,7 +21,8 @@
                 {{person.lastName}} {{person.firstName}}
             </ion-card-header>
             <ion-card-content>
-                {{person.coming}}
+                <ion-icon *ngIf="person.coming; else cancelIcon" name="checkmark"></ion-icon>
+                <ng-template #cancelIcon><ion-icon name="close"></ion-icon></ng-template>
             </ion-card-content>
         </ion-card>
     </ion-list>

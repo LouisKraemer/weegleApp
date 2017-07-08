@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { UserServiceProvider } from '../../providers/user-service/user-service';
 import { AddUserPage } from '../add-user/add-user';
-import { ActionSheetController } from 'ionic-angular';
+import { ModifyModalPage } from '../modify-modal/modify-modal';
+import { Platform, ActionSheetController, ModalController } from 'ionic-angular';
 
 @Component({
     selector: 'page-home',
@@ -11,8 +12,9 @@ import { ActionSheetController } from 'ionic-angular';
 })
 export class HomePage {
     public user: any;
+    private updateUser: any;
 
-  constructor(public navCtrl: NavController, public userService: UserServiceProvider, public actionSheetCtrl: ActionSheetController) {
+  constructor(public navCtrl: NavController, public userService: UserServiceProvider, public actionSheetCtrl: ActionSheetController, public platform: Platform, public modalCtrl: ModalController) {
       this.getUsers();
   }
     
@@ -35,6 +37,14 @@ export class HomePage {
         });
     }
     
+    presentUserModal(updateUser) {
+        let userModal = this.modalCtrl.create(ModifyModalPage, { userId: updateUser._id,
+                                                        lastName: updateUser.lastName,
+                                                        firstName: updateUser.firstName,
+                                                        coming: updateUser.coming });
+        userModal.present();
+    }
+    
     presentActionSheet(event) {
         const targetId = event.target.parentElement.id;
         let actionSheet = this.actionSheetCtrl.create({
@@ -43,6 +53,7 @@ export class HomePage {
             {
                 text: 'Supprimer',
                 role: 'destructive',
+                icon: !this.platform.is('ios') ? 'trash' : null,
                 handler: () => {
                     this.userService.deleteUser(targetId);
                     this.getUsers();
@@ -50,12 +61,19 @@ export class HomePage {
             },
             {
                 text: 'Modifier',
+                icon: !this.platform.is('ios') ? 'create' : null,
                 handler: () => {
+                    this.userService.findUserById(targetId)
+                        .then(updateUser => {
+                        this.updateUser = updateUser;
+                        this.presentUserModal(this.updateUser);
+                    })
                 }
             },
             {
                 text: 'Cancel',
                 role: 'cancel',
+                icon: !this.platform.is('ios') ? 'close' : null,
                 handler: () => {
                 }
             }
