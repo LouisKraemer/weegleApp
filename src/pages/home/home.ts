@@ -46,8 +46,8 @@ export class HomePage {
                                                                 aperoComing: updateUser.apero.coming,
                                                                 mealInvited: updateUser.meal.invited,
                                                                 mealComing: updateUser.meal.coming,
-                                                                brunchInvited: updateUser.apero.invited,
-                                                                brunchComing: updateUser.apero.coming
+                                                                brunchInvited: updateUser.brunch.invited,
+                                                                brunchComing: updateUser.brunch.coming
                                                                });
         userModal.present();
     }

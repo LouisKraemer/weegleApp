@@ -1,25 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-//import {Observable} from 'rxjs/Rx';
 
 import 'rxjs/add/operator/map';
-//import 'rxjs/add/operator/catch';
-
-/*
-  Generated class for the UserServiceProvider provider.
-
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular DI.
-*/
 @Injectable()
 export class UserServiceProvider {
     
-    private apiUrl = 'http://localhost:3000/api';
-//    private apiUrl = 'http://server-weegle.herokuapp.com/api';
+//    private apiUrl = 'http://localhost:3000/api';
+    private apiUrl = 'http://server-weegle.herokuapp.com/api';
     data: any;
 
   constructor(public http: Http) {
-//    console.log('Hello UserServiceProvider Provider');
   }
     
     getUsers() {
@@ -37,26 +27,9 @@ export class UserServiceProvider {
         })
     }
     
-    addUser(lastName, firstName, coming, aperoInvited, aperoComing, mealInvited, mealComing, brunchInvited, brunchComing) {
-        var data = {
-            lastName: lastName,
-            firstName: firstName,
-            coming: coming,
-            apero: {
-                invited: aperoInvited,
-                coming: aperoComing
-            },
-            meal: {
-                invited: mealInvited,
-                coming: mealComing
-            },
-            brunch: {
-                invited: brunchInvited,
-                coming: brunchComing
-            }
-        }
+    addUser(user) {
         return new Promise((resolve, reject) => {
-            this.http.post(this.apiUrl+'/users', data)
+            this.http.post(this.apiUrl+'/users', user)
             .subscribe(res => {
                 resolve(res);
             }, (err) => {
@@ -76,26 +49,9 @@ export class UserServiceProvider {
         })
     }
     
-    modifyUser(userId, lastName, firstName, coming, aperoInvited, aperoComing, mealInvited, mealComing, brunchInvited, brunchComing) {
-        var data = {
-            lastName: lastName,
-            firstName: firstName,
-            coming: coming,
-            apero: {
-                invited: aperoInvited,
-                coming: aperoComing
-            },
-            meal: {
-                invited: mealInvited,
-                coming: mealComing
-            },
-            brunch: {
-                invited: brunchInvited,
-                coming: brunchComing
-            }
-        }
+    modifyUser(user) {
         return new Promise((resolve, reject) => {
-            this.http.put(this.apiUrl + '/users/' + userId, data)
+            this.http.put(this.apiUrl + '/users/' + user._id, user)
             .subscribe(res => {
                 resolve(res);
             }, (err) => {

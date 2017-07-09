@@ -38289,12 +38289,24 @@ var UserServiceProvider = (function () {
             });
         });
     };
-    UserServiceProvider.prototype.addUser = function (lastName, firstName, coming) {
+    UserServiceProvider.prototype.addUser = function (lastName, firstName, coming, aperoInvited, aperoComing, mealInvited, mealComing, brunchInvited, brunchComing) {
         var _this = this;
         var data = {
             lastName: lastName,
             firstName: firstName,
-            coming: coming
+            coming: coming,
+            apero: {
+                invited: aperoInvited,
+                coming: aperoComing
+            },
+            meal: {
+                invited: mealInvited,
+                coming: mealComing
+            },
+            brunch: {
+                invited: brunchInvited,
+                coming: brunchComing
+            }
         };
         return new Promise(function (resolve, reject) {
             _this.http.post(_this.apiUrl + '/users', data)
@@ -38316,12 +38328,24 @@ var UserServiceProvider = (function () {
             });
         });
     };
-    UserServiceProvider.prototype.modifyUser = function (userId, lastName, firstName, coming) {
+    UserServiceProvider.prototype.modifyUser = function (userId, lastName, firstName, coming, aperoInvited, aperoComing, mealInvited, mealComing, brunchInvited, brunchComing) {
         var _this = this;
         var data = {
             lastName: lastName,
             firstName: firstName,
-            coming: coming
+            coming: coming,
+            apero: {
+                invited: aperoInvited,
+                coming: aperoComing
+            },
+            meal: {
+                invited: mealInvited,
+                coming: mealComing
+            },
+            brunch: {
+                invited: brunchInvited,
+                coming: brunchComing
+            }
         };
         return new Promise(function (resolve, reject) {
             _this.http.put(_this.apiUrl + '/users/' + userId, data)
@@ -56577,6 +56601,18 @@ var AddUserPage = (function () {
         this.lastName = "";
         this.firstName = "";
         this.coming = false;
+        this.apero = {
+            invited: false,
+            coming: false
+        };
+        this.meal = {
+            invited: false,
+            coming: false
+        };
+        this.brunch = {
+            invited: false,
+            coming: false
+        };
     }
     AddUserPage.prototype.addUser = function () {
         //        var newUser = {
@@ -56584,7 +56620,7 @@ var AddUserPage = (function () {
         //            firstName: this.firstName,
         //            coming: this.coming
         //        }
-        this.userService.addUser(this.lastName, this.firstName, this.coming).then(function (result) {
+        this.userService.addUser(this.lastName, this.firstName, this.coming, this.apero.invited, this.apero.coming, this.meal.invited, this.meal.coming, this.brunch.invited, this.meal.coming).then(function (result) {
             console.log(result);
         }, function (err) {
             console.log(err);
@@ -56599,7 +56635,7 @@ var AddUserPage = (function () {
 AddUserPage = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
-        selector: 'page-add-user',template:/*ion-inline-start:"C:\Users\louis\Documents\weegleApp\src\pages\add-user\add-user.html"*/'<!--\n\n  Generated template for the AddUserPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n    <ion-navbar>\n\n        <ion-title>Ajouter un invité</ion-title>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n    <ion-list>\n\n        <ion-item>\n\n            <ion-label color="primary" floating>Nom</ion-label>\n\n            <ion-input [(ngModel)]="lastName" name="lastName"></ion-input>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label color="primary" floating>Prénom</ion-label>\n\n            <ion-input [(ngModel)]="firstName" name="firstName"></ion-input>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label>Vient</ion-label>\n\n            <ion-toggle [(ngModel)]="coming" name="coming"></ion-toggle>\n\n        </ion-item>\n\n    </ion-list>\n\n    <button ion-button full (click)="addUser()">Valider</button>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\louis\Documents\weegleApp\src\pages\add-user\add-user.html"*/,
+        selector: 'page-add-user',template:/*ion-inline-start:"C:\Users\louis\Documents\weegleApp\src\pages\add-user\add-user.html"*/'<!--\n\n  Generated template for the AddUserPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n    <ion-navbar>\n\n        <ion-title>Ajouter un invité</ion-title>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n    <ion-list>\n\n        <ion-item>\n\n            <ion-label color="primary" floating>Nom</ion-label>\n\n            <ion-input [(ngModel)]="lastName" name="lastName"></ion-input>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label color="primary" floating>Prénom</ion-label>\n\n            <ion-input [(ngModel)]="firstName" name="firstName"></ion-input>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label>Vient</ion-label>\n\n            <ion-toggle [(ngModel)]="coming" name="coming"></ion-toggle>\n\n        </ion-item>\n\n    </ion-list>\n\n    <ion-list no-lines>\n\n        <ion-list-header>Invité à</ion-list-header>\n\n        <ion-item>\n\n            <ion-label>Apéritif</ion-label>\n\n            <ion-toggle [(ngModel)]="apero.invited" name="aperoInvited"></ion-toggle>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label>Repas</ion-label>\n\n            <ion-toggle [(ngModel)]="meal.invited" name="mealInvited"></ion-toggle>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label>Brunch</ion-label>\n\n            <ion-toggle [(ngModel)]="brunch.invited" name="brunchInvited"></ion-toggle>\n\n        </ion-item>\n\n    </ion-list>\n\n    <ion-list no-lines *ngIf="apero.invited || meal.invited || brunch.invited">\n\n        <ion-list-header>Vient à</ion-list-header>\n\n            <ion-item *ngIf=apero.invited>\n\n                <ion-label>Apéritif</ion-label>\n\n                <ion-toggle [(ngModel)]="apero.coming" name="aperoComing"></ion-toggle>\n\n            </ion-item>\n\n            <ion-item *ngIf=meal.invited>\n\n                <ion-label>Repas</ion-label>\n\n                <ion-toggle [(ngModel)]="meal.coming" name="mealComing"></ion-toggle>\n\n            </ion-item>\n\n            <ion-item *ngIf=brunch.invited>\n\n                <ion-label>Brunch</ion-label>\n\n                <ion-toggle [(ngModel)]="brunch.coming" name="brunchComing"></ion-toggle>\n\n            </ion-item>\n\n    </ion-list>\n\n    <button ion-button full (click)="addUser()">Valider</button>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\louis\Documents\weegleApp\src\pages\add-user\add-user.html"*/,
         providers: [__WEBPACK_IMPORTED_MODULE_2__providers_user_service_user_service__["a" /* UserServiceProvider */]]
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_user_service_user_service__["a" /* UserServiceProvider */]])
@@ -56645,13 +56681,25 @@ var ModifyModalPage = (function () {
         this.lastName = "";
         this.firstName = "";
         this.coming = false;
+        this.aperoInvited = false;
+        this.aperoComing = false;
+        this.mealInvited = false;
+        this.mealComing = false;
+        this.brunchInvited = false;
+        this.brunchComing = false;
         this.userId = navParams.get('userId');
         this.lastName = navParams.get('lastName');
         this.firstName = navParams.get('firstName');
         this.coming = navParams.get('coming');
+        this.aperoInvited = navParams.get('aperoInvited');
+        this.aperoComing = navParams.get('aperoComing');
+        this.mealInvited = navParams.get('mealInvited');
+        this.mealComing = navParams.get('mealComing');
+        this.brunchInvited = navParams.get('brunchInvited');
+        this.brunchComing = navParams.get('brunchComing');
     }
     ModifyModalPage.prototype.updateUser = function () {
-        this.userService.modifyUser(this.userId, this.lastName, this.firstName, this.coming);
+        this.userService.modifyUser(this.userId, this.lastName, this.firstName, this.coming, this.aperoInvited, this.aperoComing, this.mealInvited, this.mealComing, this.brunchInvited, this.brunchComing);
         this.viewCtrl.dismiss();
     };
     return ModifyModalPage;
@@ -56659,7 +56707,7 @@ var ModifyModalPage = (function () {
 ModifyModalPage = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
-        selector: 'page-modify-modal',template:/*ion-inline-start:"C:\Users\louis\Documents\weegleApp\src\pages\modify-modal\modify-modal.html"*/'<!--\n\n  Generated template for the ModifyModalPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n    <ion-navbar>\n\n        <ion-title>Modifier un invité</ion-title>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n    <ion-list>\n\n        <ion-item>\n\n            <ion-label color="primary" floating>Nom</ion-label>\n\n            <ion-input [(ngModel)]="lastName" name="lastName"></ion-input>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label color="primary" floating>Prénom</ion-label>\n\n            <ion-input [(ngModel)]="firstName" name="firstName"></ion-input>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label>Vient</ion-label>\n\n            <ion-toggle [(ngModel)]="coming" name="coming"></ion-toggle>\n\n        </ion-item>\n\n    </ion-list>\n\n    <button ion-button full (click)="updateUser()">Modifier</button>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\louis\Documents\weegleApp\src\pages\modify-modal\modify-modal.html"*/,
+        selector: 'page-modify-modal',template:/*ion-inline-start:"C:\Users\louis\Documents\weegleApp\src\pages\modify-modal\modify-modal.html"*/'<!--\n\n  Generated template for the ModifyModalPage page.\n\n\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n\n  Ionic pages and navigation.\n\n-->\n\n<ion-header>\n\n\n\n    <ion-navbar>\n\n        <ion-title>Modifier un invité</ion-title>\n\n    </ion-navbar>\n\n\n\n</ion-header>\n\n\n\n\n\n<ion-content padding>\n\n    <ion-list>\n\n        <ion-item>\n\n            <ion-label color="primary" floating>Nom</ion-label>\n\n            <ion-input [(ngModel)]="lastName" name="lastName"></ion-input>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label color="primary" floating>Prénom</ion-label>\n\n            <ion-input [(ngModel)]="firstName" name="firstName"></ion-input>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label>Vient</ion-label>\n\n            <ion-toggle [(ngModel)]="coming" name="coming"></ion-toggle>\n\n        </ion-item>\n\n    </ion-list>\n\n    <ion-list no-lines>\n\n        <ion-list-header>Invité à</ion-list-header>\n\n        <ion-item>\n\n            <ion-label>Apéritif</ion-label>\n\n            <ion-toggle [(ngModel)]="aperoInvited" name="aperoInvited"></ion-toggle>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label>Repas</ion-label>\n\n            <ion-toggle [(ngModel)]="mealInvited" name="mealInvited"></ion-toggle>\n\n        </ion-item>\n\n        <ion-item>\n\n            <ion-label>Brunch</ion-label>\n\n            <ion-toggle [(ngModel)]="brunchInvited" name="brunchInvited"></ion-toggle>\n\n        </ion-item>\n\n    </ion-list>\n\n    <ion-list no-lines *ngIf="aperoInvited || mealInvited || brunchInvited">\n\n        <ion-list-header>Vient à</ion-list-header>\n\n        <ion-item *ngIf=aperoInvited>\n\n            <ion-label>Apéritif</ion-label>\n\n            <ion-toggle [(ngModel)]="aperoComing" name="aperoComing"></ion-toggle>\n\n        </ion-item>\n\n        <ion-item *ngIf=mealInvited>\n\n            <ion-label>Repas</ion-label>\n\n            <ion-toggle [(ngModel)]="mealComing" name="mealComing"></ion-toggle>\n\n        </ion-item>\n\n        <ion-item *ngIf=brunchInvited>\n\n            <ion-label>Brunch</ion-label>\n\n            <ion-toggle [(ngModel)]="brunchComing" name="brunchComing"></ion-toggle>\n\n        </ion-item>\n\n    </ion-list>\n\n    <button ion-button full (click)="updateUser()">Modifier</button>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\louis\Documents\weegleApp\src\pages\modify-modal\modify-modal.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__providers_user_service_user_service__["a" /* UserServiceProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* ViewController */]])
 ], ModifyModalPage);
@@ -56735,12 +56783,18 @@ var HomePage = (function () {
         var userModal = this.modalCtrl.create(__WEBPACK_IMPORTED_MODULE_4__modify_modal_modify_modal__["a" /* ModifyModalPage */], { userId: updateUser._id,
             lastName: updateUser.lastName,
             firstName: updateUser.firstName,
-            coming: updateUser.coming });
+            coming: updateUser.coming,
+            aperoInvited: updateUser.apero.invited,
+            aperoComing: updateUser.apero.coming,
+            mealInvited: updateUser.meal.invited,
+            mealComing: updateUser.meal.coming,
+            brunchInvited: updateUser.apero.invited,
+            brunchComing: updateUser.apero.coming
+        });
         userModal.present();
     };
-    HomePage.prototype.presentActionSheet = function (event) {
+    HomePage.prototype.presentActionSheet = function (targetId) {
         var _this = this;
-        var targetId = event.target.parentElement.id;
         var actionSheet = this.actionSheetCtrl.create({
             title: 'Que voulez-vous faire ?',
             buttons: [
@@ -56779,7 +56833,7 @@ var HomePage = (function () {
 }());
 HomePage = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
-        selector: 'page-home',template:/*ion-inline-start:"C:\Users\louis\Documents\weegleApp\src\pages\home\home.html"*/'<ion-header>\n\n    <ion-navbar>\n\n        <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n        <ion-title>Home</ion-title>\n\n    </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n    <ion-refresher (ionRefresh)="doRefresh($event)">\n\n        <ion-refresher-content></ion-refresher-content>\n\n    </ion-refresher>\n\n    <ion-fab bottom right>\n\n        <button ion-fab (click)="addClicked()"><ion-icon name="add"></ion-icon></button>\n\n    </ion-fab>\n\n\n\n    <ion-list>\n\n        <ion-card *ngFor="let person of user" (press)="presentActionSheet($event)" id={{person._id}}>\n\n            <ion-card-header>\n\n                {{person.lastName}} {{person.firstName}}\n\n            </ion-card-header>\n\n            <ion-card-content>\n\n                <ion-icon *ngIf="person.coming; else cancelIcon" name="checkmark"></ion-icon>\n\n                <ng-template #cancelIcon><ion-icon name="close"></ion-icon></ng-template>\n\n            </ion-card-content>\n\n        </ion-card>\n\n    </ion-list>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\louis\Documents\weegleApp\src\pages\home\home.html"*/,
+        selector: 'page-home',template:/*ion-inline-start:"C:\Users\louis\Documents\weegleApp\src\pages\home\home.html"*/'<ion-header>\n\n    <ion-navbar>\n\n        <button ion-button menuToggle>\n\n      <ion-icon name="menu"></ion-icon>\n\n    </button>\n\n        <ion-title>Home</ion-title>\n\n    </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n    <ion-refresher (ionRefresh)="doRefresh($event)">\n\n        <ion-refresher-content></ion-refresher-content>\n\n    </ion-refresher>\n\n    <ion-fab bottom right>\n\n        <button ion-fab (click)="addClicked()"><ion-icon name="add"></ion-icon></button>\n\n    </ion-fab>\n\n\n\n    <ion-list>\n\n        <ion-card *ngFor="let person of user" (press)="presentActionSheet(person._id)">\n\n            <ion-card-header>\n\n                {{person.lastName}} {{person.firstName}}\n\n            </ion-card-header>\n\n            <ion-card-content>\n\n                <ion-item>\n\n                    <ion-icon *ngIf="person.coming; else cancelIcon" name="checkmark"></ion-icon>\n\n                    <ng-template #cancelIcon>\n\n                        <ion-icon name="close"></ion-icon>\n\n                    </ng-template>\n\n                    <ion-note item-end>\n\n                        <ion-icon *ngIf="person.apero.invited && person.apero.coming" name="radio-button-on"></ion-icon>\n\n                        <ion-icon *ngIf="person.apero.invited && !person.apero.coming" name="radio-button-off"></ion-icon>\n\n                        <ion-icon *ngIf="!person.apero.invited" name="remove"></ion-icon>\n\n                        <ion-icon *ngIf="person.meal.invited && person.meal.coming" name="radio-button-on"></ion-icon>\n\n                        <ion-icon *ngIf="person.meal.invited && !person.meal.coming" name="radio-button-off"></ion-icon>\n\n                        <ion-icon *ngIf="!person.meal.invited" name="remove"></ion-icon>\n\n                        <ion-icon *ngIf="person.brunch.invited && person.brunch.coming" name="radio-button-on"></ion-icon>\n\n                        <ion-icon *ngIf="person.brunch.invited && !person.brunch.coming" name="radio-button-off"></ion-icon>\n\n                        <ion-icon *ngIf="!person.brunch.invited" name="remove"></ion-icon>\n\n                    </ion-note>\n\n                </ion-item>\n\n            </ion-card-content>\n\n        </ion-card>\n\n    </ion-list>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\louis\Documents\weegleApp\src\pages\home\home.html"*/,
         providers: [__WEBPACK_IMPORTED_MODULE_2__providers_user_service_user_service__["a" /* UserServiceProvider */]]
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__providers_user_service_user_service__["a" /* UserServiceProvider */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* ActionSheetController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* Platform */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["k" /* ModalController */]])

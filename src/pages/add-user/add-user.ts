@@ -15,32 +15,29 @@ import { UserServiceProvider } from '../../providers/user-service/user-service';
     providers: [UserServiceProvider]
 })
 export class AddUserPage {
-    lastName = "";
-    firstName = "";
-    coming = false;
-    apero = {
-        invited: false,
-        coming: false
-    }
-    meal = {
-        invited: false,
-        coming: false
-    }
-    brunch = {
-        invited: false,
-        coming: false
+    newUser = {
+        lastName: "",
+        firstName: "",
+        coming: false,
+        apero: {
+            invited: false,
+            coming: false
+        },
+        meal: {
+            invited: false,
+            coming: false
+        },
+        brunch: {
+            invited: false,
+            coming: false
+        }
     }
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public userService: UserServiceProvider) {
   }
 
     addUser() {
-//        var newUser = {
-//            lastname: this.lastName,
-//            firstName: this.firstName,
-//            coming: this.coming
-//        }
-        this.userService.addUser(this.lastName, this.firstName, this.coming, this.apero.invited, this.apero.coming, this.meal.invited, this.meal.coming, this.brunch.invited, this.meal.coming).then((result) => {
+        this.userService.addUser(this.newUser).then((result) => {
             console.log(result);
         }, (err) => {
             console.log(err);
@@ -49,7 +46,6 @@ export class AddUserPage {
     }
 
   ionViewDidLoad() {
-//    console.log('ionViewDidLoad AddUserPage');
   }
 
 }
