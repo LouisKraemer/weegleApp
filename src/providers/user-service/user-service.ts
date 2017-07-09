@@ -37,11 +37,23 @@ export class UserServiceProvider {
         })
     }
     
-    addUser(lastName, firstName, coming) {
+    addUser(lastName, firstName, coming, aperoInvited, aperoComing, mealInvited, mealComing, brunchInvited, brunchComing) {
         var data = {
             lastName: lastName,
             firstName: firstName,
-            coming: coming
+            coming: coming,
+            apero: {
+                invited: aperoInvited,
+                coming: aperoComing
+            },
+            meal: {
+                invited: mealInvited,
+                coming: mealComing
+            },
+            brunch: {
+                invited: brunchInvited,
+                coming: brunchComing
+            }
         }
         return new Promise((resolve, reject) => {
             this.http.post(this.apiUrl+'/users', data)
@@ -64,11 +76,23 @@ export class UserServiceProvider {
         })
     }
     
-    modifyUser(userId, lastName, firstName, coming) {
+    modifyUser(userId, lastName, firstName, coming, aperoInvited, aperoComing, mealInvited, mealComing, brunchInvited, brunchComing) {
         var data = {
             lastName: lastName,
             firstName: firstName,
-            coming: coming
+            coming: coming,
+            apero: {
+                invited: aperoInvited,
+                coming: aperoComing
+            },
+            meal: {
+                invited: mealInvited,
+                coming: mealComing
+            },
+            brunch: {
+                invited: brunchInvited,
+                coming: brunchComing
+            }
         }
         return new Promise((resolve, reject) => {
             this.http.put(this.apiUrl + '/users/' + userId, data)

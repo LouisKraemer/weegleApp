@@ -18,6 +18,18 @@ export class AddUserPage {
     lastName = "";
     firstName = "";
     coming = false;
+    apero = {
+        invited: false,
+        coming: false
+    }
+    meal = {
+        invited: false,
+        coming: false
+    }
+    brunch = {
+        invited: false,
+        coming: false
+    }
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public userService: UserServiceProvider) {
   }
@@ -28,7 +40,7 @@ export class AddUserPage {
 //            firstName: this.firstName,
 //            coming: this.coming
 //        }
-        this.userService.addUser(this.lastName, this.firstName, this.coming).then((result) => {
+        this.userService.addUser(this.lastName, this.firstName, this.coming, this.apero.invited, this.apero.coming, this.meal.invited, this.meal.coming, this.brunch.invited, this.meal.coming).then((result) => {
             console.log(result);
         }, (err) => {
             console.log(err);

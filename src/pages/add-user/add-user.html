@@ -28,5 +28,35 @@
             <ion-toggle [(ngModel)]="coming" name="coming"></ion-toggle>
         </ion-item>
     </ion-list>
+    <ion-list no-lines>
+        <ion-list-header>Invité à</ion-list-header>
+        <ion-item>
+            <ion-label>Apéritif</ion-label>
+            <ion-toggle [(ngModel)]="apero.invited" name="aperoInvited"></ion-toggle>
+        </ion-item>
+        <ion-item>
+            <ion-label>Repas</ion-label>
+            <ion-toggle [(ngModel)]="meal.invited" name="mealInvited"></ion-toggle>
+        </ion-item>
+        <ion-item>
+            <ion-label>Brunch</ion-label>
+            <ion-toggle [(ngModel)]="brunch.invited" name="brunchInvited"></ion-toggle>
+        </ion-item>
+    </ion-list>
+    <ion-list no-lines *ngIf="apero.invited || meal.invited || brunch.invited">
+        <ion-list-header>Vient à</ion-list-header>
+            <ion-item *ngIf=apero.invited>
+                <ion-label>Apéritif</ion-label>
+                <ion-toggle [(ngModel)]="apero.coming" name="aperoComing"></ion-toggle>
+            </ion-item>
+            <ion-item *ngIf=meal.invited>
+                <ion-label>Repas</ion-label>
+                <ion-toggle [(ngModel)]="meal.coming" name="mealComing"></ion-toggle>
+            </ion-item>
+            <ion-item *ngIf=brunch.invited>
+                <ion-label>Brunch</ion-label>
+                <ion-toggle [(ngModel)]="brunch.coming" name="brunchComing"></ion-toggle>
+            </ion-item>
+    </ion-list>
     <button ion-button full (click)="addUser()">Valider</button>
 </ion-content>

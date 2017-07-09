@@ -39,14 +39,20 @@ export class HomePage {
     
     presentUserModal(updateUser) {
         let userModal = this.modalCtrl.create(ModifyModalPage, { userId: updateUser._id,
-                                                        lastName: updateUser.lastName,
-                                                        firstName: updateUser.firstName,
-                                                        coming: updateUser.coming });
+                                                                lastName: updateUser.lastName,
+                                                                firstName: updateUser.firstName,
+                                                                coming: updateUser.coming,
+                                                                aperoInvited: updateUser.apero.invited,
+                                                                aperoComing: updateUser.apero.coming,
+                                                                mealInvited: updateUser.meal.invited,
+                                                                mealComing: updateUser.meal.coming,
+                                                                brunchInvited: updateUser.apero.invited,
+                                                                brunchComing: updateUser.apero.coming
+                                                               });
         userModal.present();
     }
     
-    presentActionSheet(event) {
-        const targetId = event.target.parentElement.id;
+    presentActionSheet(targetId) {
         let actionSheet = this.actionSheetCtrl.create({
             title: 'Que voulez-vous faire ?',
             buttons: [

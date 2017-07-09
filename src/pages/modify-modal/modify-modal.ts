@@ -19,16 +19,28 @@ export class ModifyModalPage {
     lastName = "";
     firstName = "";
     coming = false;
+    aperoInvited = false;
+    aperoComing = false;
+    mealInvited = false;
+    mealComing = false;
+    brunchInvited = false;
+    brunchComing = false;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public userService: UserServiceProvider, public viewCtrl: ViewController) {
       this.userId = navParams.get('userId');
       this.lastName = navParams.get('lastName');
       this.firstName = navParams.get('firstName');
       this.coming = navParams.get('coming');
+      this.aperoInvited = navParams.get('aperoInvited');
+      this.aperoComing = navParams.get('aperoComing');
+      this.mealInvited = navParams.get('mealInvited');
+      this.mealComing = navParams.get('mealComing');
+      this.brunchInvited = navParams.get('brunchInvited');
+      this.brunchComing = navParams.get('brunchComing');
   }
     
     updateUser() {
-        this.userService.modifyUser(this.userId, this.lastName, this.firstName, this.coming);
+        this.userService.modifyUser(this.userId, this.lastName, this.firstName, this.coming, this.aperoInvited, this.aperoComing, this.mealInvited, this.mealComing, this.brunchInvited, this.brunchComing);
         this.viewCtrl.dismiss();
     }
 
