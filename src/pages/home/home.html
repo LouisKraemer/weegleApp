@@ -16,7 +16,7 @@
     </ion-fab>
 
     <ion-list>
-        <ion-card *ngFor="let person of user" (press)="presentActionSheet(person._id)">
+        <ion-card *ngFor="let person of user | sortBy" (press)="presentActionSheet(person._id)">
             <ion-card-header>
                 {{person.lastName}} {{person.firstName}}
             </ion-card-header>

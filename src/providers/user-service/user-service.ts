@@ -5,8 +5,8 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class UserServiceProvider {
     
-//    private apiUrl = 'http://localhost:3000/api';
-    private apiUrl = 'http://server-weegle.herokuapp.com/api';
+    private apiUrl = 'http://localhost:3000/api';
+//    private apiUrl = 'http://server-weegle.herokuapp.com/api';
     data: any;
 
   constructor(public http: Http) {

@@ -1,0 +1,65 @@
+<ion-header>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-navbar>
+        <ion-title>Statistiques</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+    <ion-list>
+        <ion-list-header>Informations générales</ion-list-header>
+        <ion-item>
+            Invités
+            <ion-note item-end>{{ userCount }}</ion-note>
+        </ion-item>
+        <ion-item>
+            Ayant répondu
+            <ion-note item-end>{{ answerCount }}</ion-note>
+        </ion-item>
+        <ion-item>
+            Venant
+            <ion-note item-end>{{ comingCount }}</ion-note>
+        </ion-item>
+        <ion-list>
+            <ion-list-header>Apéritif</ion-list-header>
+            <ion-item>
+                Invités
+                <ion-note item-end>{{ aperoCount }}</ion-note>
+            </ion-item>
+            <ion-item>
+                Venant
+                <ion-note item-end>{{ aperoComingCount }}</ion-note>
+            </ion-item>
+        </ion-list>
+        <ion-list>
+            <ion-list-header>Repas</ion-list-header>
+            <ion-item>
+                Invités
+                <ion-note item-end>{{ mealCount }}</ion-note>
+            </ion-item>
+            <ion-item>
+                Venant
+                <ion-note item-end>{{ mealComingCount }}</ion-note>
+            </ion-item>
+        </ion-list>
+        <ion-list>
+            <ion-list-header>Brunch</ion-list-header>
+            <ion-item>
+                Invités
+                <ion-note item-end>{{ brunchCount }}</ion-note>
+            </ion-item>
+            <ion-item>
+                Venant
+                <ion-note item-end>{{ brunchComingCount }}</ion-note>
+            </ion-item>
+        </ion-list>
+    </ion-list>
+
+</ion-content>

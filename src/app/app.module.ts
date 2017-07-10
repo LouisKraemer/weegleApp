@@ -5,21 +5,23 @@ import { HttpModule } from '@angular/http';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
 import { AddUserPage } from '../pages/add-user/add-user';
 import { ModifyModalPage } from '../pages/modify-modal/modify-modal';
+import { StatsPage } from '../pages/stats/stats';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { UserServiceProvider } from '../providers/user-service/user-service';
+import { SortBy } from './pipes/sort';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    ListPage,
     AddUserPage,
     ModifyModalPage,
+    SortBy,
+    StatsPage
   ],
   imports: [
     BrowserModule,
@@ -30,9 +32,9 @@ import { UserServiceProvider } from '../providers/user-service/user-service';
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage,
     AddUserPage,
     ModifyModalPage,
+    StatsPage
   ],
   providers: [
     StatusBar,

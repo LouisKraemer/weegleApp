@@ -5,6 +5,8 @@ import { AddUserPage } from '../add-user/add-user';
 import { ModifyModalPage } from '../modify-modal/modify-modal';
 import { Platform, ActionSheetController, ModalController } from 'ionic-angular';
 
+//import { SortBy } from '../../app/pipes/sort';
+
 @Component({
     selector: 'page-home',
     templateUrl: 'home.html',
