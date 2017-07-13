@@ -56846,6 +56846,9 @@ var HomePage = (function () {
         this.filter = "all";
         this.getUsers();
     }
+    HomePage.prototype.ionViewDidLoad = function () {
+        this.getUsers();
+    };
     HomePage.prototype.getUsers = function () {
         var _this = this;
         this.userService.getUsers()
@@ -56889,8 +56892,9 @@ var HomePage = (function () {
                     role: 'destructive',
                     icon: !this.platform.is('ios') ? 'trash' : null,
                     handler: function () {
-                        _this.userService.deleteUser(targetId);
-                        _this.getUsers();
+                        _this.userService.deleteUser(targetId).then(function (result) {
+                            _this.getUsers();
+                        });
                     }
                 },
                 {

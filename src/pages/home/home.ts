@@ -20,6 +20,10 @@ export class HomePage {
       this.getUsers();
   }
     
+    ionViewDidLoad() {
+        this.getUsers();
+  }
+    
     getUsers() {
         this.userService.getUsers()
             .then(data => {
@@ -64,8 +68,9 @@ export class HomePage {
                 role: 'destructive',
                 icon: !this.platform.is('ios') ? 'trash' : null,
                 handler: () => {
-                    this.userService.deleteUser(targetId);
-                    this.getUsers();
+                    this.userService.deleteUser(targetId).then(result => {
+                        this.getUsers();
+                    });
                 }
             },
             {
