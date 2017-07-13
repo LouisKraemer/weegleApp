@@ -25,7 +25,8 @@ export class ModifyModalPage {
         brunch: {
             invited: false,
             coming: false
-        }
+        },
+        children: ""
     }
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public userService: UserServiceProvider, public viewCtrl: ViewController) {
@@ -45,7 +46,8 @@ export class ModifyModalPage {
         brunch: {
             invited: navParams.get('brunchInvited'),
             coming: navParams.get('brunchComing')
-        }
+        },
+        children: navParams.get('children')
     }
   }
     

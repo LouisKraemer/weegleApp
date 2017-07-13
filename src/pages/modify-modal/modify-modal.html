@@ -27,6 +27,16 @@
             <ion-label>Vient</ion-label>
             <ion-toggle [(ngModel)]="modifiedUser.coming" name="coming"></ion-toggle>
         </ion-item>
+        <ion-item>
+            <ion-label>Enfants</ion-label>
+            <ion-select [(ngModel)]="modifiedUser.children" name="children">
+                <ion-option value='0'>0</ion-option>
+                <ion-option value='1'>1</ion-option>
+                <ion-option value='2'>2</ion-option>
+                <ion-option value='3'>3</ion-option>
+                <ion-option value='4'>4</ion-option>
+            </ion-select>
+        </ion-item>
     </ion-list>
     <ion-list no-lines>
         <ion-list-header>Invité à</ion-list-header>

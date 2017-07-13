@@ -18,7 +18,7 @@
     <ion-list>
         <ion-card *ngFor="let person of user | sortBy" (press)="presentActionSheet(person._id)">
             <ion-card-header>
-                {{person.lastName}} {{person.firstName}}
+                {{person.lastName}} {{person.firstName}} ({{person.children}})
             </ion-card-header>
             <ion-card-content>
                 <ion-item>

@@ -49,7 +49,8 @@ export class HomePage {
                                                                 mealInvited: updateUser.meal.invited,
                                                                 mealComing: updateUser.meal.coming,
                                                                 brunchInvited: updateUser.brunch.invited,
-                                                                brunchComing: updateUser.brunch.coming
+                                                                brunchComing: updateUser.brunch.coming,
+                                                                children: updateUser.children
                                                                });
         userModal.present();
     }

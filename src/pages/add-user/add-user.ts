@@ -30,7 +30,8 @@ export class AddUserPage {
         brunch: {
             invited: false,
             coming: false
-        }
+        },
+        children: "0"
     }
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public userService: UserServiceProvider) {

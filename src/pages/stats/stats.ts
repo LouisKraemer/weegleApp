@@ -26,6 +26,7 @@ export class StatsPage {
     mealComingCount = 0;
     brunchCount = 0;
     brunchComingCount = 0;
+    childrenCount = 0;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public userService: UserServiceProvider) {
       this.getUsers();
@@ -58,6 +59,7 @@ export class StatsPage {
         this.aperoComingCount = 0;
         this.mealComingCount = 0;
         this.brunchComingCount = 0;
+        this.childrenCount = 0;
         
         for (var i in users) {
             this.userCount++;
@@ -65,6 +67,7 @@ export class StatsPage {
                 this.answerCount++;
                 if (users[i].coming) {
                     this.comingCount++;
+                    this.childrenCount = this.childrenCount + Number(users[i].children);
                     if (users[i].apero.invited) {
                         this.aperoCount++;
                         if(users[i].apero.coming) {
