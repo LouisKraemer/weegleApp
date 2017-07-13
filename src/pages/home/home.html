@@ -4,10 +4,14 @@
       <ion-icon name="menu"></ion-icon>
     </button>
         <ion-title>Home</ion-title>
+        <ion-buttons end padding><button ion-button (click)="filterActionSheet()"><ion-icon name="funnel"></ion-icon></button></ion-buttons>
     </ion-navbar>
+    <ion-toolbar>
+        <ion-searchbar [(ngModel)]="search"></ion-searchbar>
+    </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
     <ion-refresher (ionRefresh)="doRefresh($event)">
         <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
@@ -15,8 +19,8 @@
         <button ion-fab (click)="addClicked()"><ion-icon name="add"></ion-icon></button>
     </ion-fab>
 
-    <ion-list>
-        <ion-card *ngFor="let person of user | sortBy" (press)="presentActionSheet(person._id)">
+    <ion-list padding>
+        <ion-card *ngFor="let person of user | sort | search:search | filter:filter" (press)="presentActionSheet(person._id)">
             <ion-card-header>
                 {{person.lastName}} {{person.firstName}} ({{person.children}})
             </ion-card-header>

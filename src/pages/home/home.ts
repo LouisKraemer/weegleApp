@@ -5,8 +5,6 @@ import { AddUserPage } from '../add-user/add-user';
 import { ModifyModalPage } from '../modify-modal/modify-modal';
 import { Platform, ActionSheetController, ModalController } from 'ionic-angular';
 
-//import { SortBy } from '../../app/pipes/sort';
-
 @Component({
     selector: 'page-home',
     templateUrl: 'home.html',
@@ -15,6 +13,8 @@ import { Platform, ActionSheetController, ModalController } from 'ionic-angular'
 export class HomePage {
     public user: any;
     private updateUser: any;
+    search = "";
+    filter = "all";
 
   constructor(public navCtrl: NavController, public userService: UserServiceProvider, public actionSheetCtrl: ActionSheetController, public platform: Platform, public modalCtrl: ModalController) {
       this.getUsers();
@@ -80,9 +80,46 @@ export class HomePage {
                 }
             },
             {
-                text: 'Cancel',
+                text: 'Annuler',
                 role: 'cancel',
                 icon: !this.platform.is('ios') ? 'close' : null,
+                handler: () => {
+                }
+            }
+            ]
+        });
+
+        actionSheet.present();
+    }
+    
+    filterActionSheet() {
+        console.log('test')
+        let actionSheet = this.actionSheetCtrl.create({
+            title: 'Filtrer',
+            buttons: [
+            {
+                text: 'Tout le monde',
+//                icon: !this.platform.is('ios') ? 'trash' : null,
+                handler: () => {
+                    this.filter = "all";
+                }
+            },
+            {
+                text: 'Présent',
+                handler: () => {
+                    this.filter = "coming";
+                }
+            },
+            {
+                text: 'Sans réponse',
+                handler: () => {
+                    this.filter = "noAnswer"
+                }
+            },
+            {
+                text: 'Annuler',
+                role: 'cancel',
+//                icon: !this.platform.is('ios') ? 'close' : null,
                 handler: () => {
                 }
             }

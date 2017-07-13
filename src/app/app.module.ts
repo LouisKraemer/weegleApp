@@ -12,7 +12,9 @@ import { StatsPage } from '../pages/stats/stats';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { UserServiceProvider } from '../providers/user-service/user-service';
-import { SortBy } from './pipes/sort';
+import { SearchPipe } from '../pipes/search/search';
+import { SortPipe } from '../pipes/sort/sort';
+import { FilterPipe } from '../pipes/filter/filter';
 
 @NgModule({
   declarations: [
@@ -20,8 +22,10 @@ import { SortBy } from './pipes/sort';
     HomePage,
     AddUserPage,
     ModifyModalPage,
-    SortBy,
-    StatsPage
+    StatsPage,
+    SearchPipe,
+    SortPipe,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
