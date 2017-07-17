@@ -1,5 +1,5 @@
 <ion-header>
-    <ion-navbar>
+    <ion-navbar color="primary">
         <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
@@ -14,7 +14,7 @@
         <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
     <ion-list>
-        <ion-list-header>Informations générales</ion-list-header>
+        <ion-list-header><ion-label color="primary">Informations générales</ion-label></ion-list-header>
         <ion-item>
             Invités
             <ion-note item-end>{{ userCount }}</ion-note>
@@ -32,7 +32,7 @@
             <ion-note item-end>{{ childrenCount }}</ion-note>
         </ion-item>
         <ion-list>
-            <ion-list-header>Apéritif</ion-list-header>
+            <ion-list-header><ion-label color="primary">Apéritif</ion-label></ion-list-header>
             <ion-item>
                 Invités
                 <ion-note item-end>{{ aperoCount }}</ion-note>
@@ -43,7 +43,7 @@
             </ion-item>
         </ion-list>
         <ion-list>
-            <ion-list-header>Repas</ion-list-header>
+            <ion-list-header><ion-label color="primary">Repas</ion-label></ion-list-header>
             <ion-item>
                 Invités
                 <ion-note item-end>{{ mealCount }}</ion-note>
@@ -54,7 +54,7 @@
             </ion-item>
         </ion-list>
         <ion-list>
-            <ion-list-header>Brunch</ion-list-header>
+            <ion-list-header><ion-label color="primary">Brunch</ion-label></ion-list-header>
             <ion-item>
                 Invités
                 <ion-note item-end>{{ brunchCount }}</ion-note>

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { UserServiceProvider } from '../../providers/user-service/user-service';
 import { ViewController } from 'ionic-angular';
+import { Events } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -29,7 +30,7 @@ export class ModifyModalPage {
         children: ""
     }
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public userService: UserServiceProvider, public viewCtrl: ViewController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public userService: UserServiceProvider, public viewCtrl: ViewController, public events: Events) {
       this.modifiedUser = {
           _id: navParams.get('userId'),
         lastName: navParams.get('lastName'),
@@ -53,6 +54,12 @@ export class ModifyModalPage {
     
     updateUser() {
         this.userService.modifyUser(this.modifiedUser);
+        this.events.publish('modifiedUser', this.modifiedUser.lastName, this.modifiedUser.firstName);
+        this.viewCtrl.dismiss();
+        
+    }
+    
+    closeModal() {
         this.viewCtrl.dismiss();
     }
 

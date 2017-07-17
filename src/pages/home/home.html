@@ -1,12 +1,12 @@
 <ion-header>
-    <ion-navbar>
+    <ion-navbar color="primary">
         <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
         <ion-title>Home</ion-title>
         <ion-buttons end padding><button ion-button (click)="filterActionSheet()"><ion-icon name="funnel"></ion-icon></button></ion-buttons>
     </ion-navbar>
-    <ion-toolbar>
+    <ion-toolbar color="primary">
         <ion-searchbar [(ngModel)]="search"></ion-searchbar>
     </ion-toolbar>
 </ion-header>
@@ -16,11 +16,11 @@
         <ion-refresher-content></ion-refresher-content>
     </ion-refresher>
     <ion-fab bottom right>
-        <button ion-fab (click)="addClicked()"><ion-icon name="add"></ion-icon></button>
+        <button ion-fab (click)="addClicked()" color="danger"><ion-icon name="add"></ion-icon></button>
     </ion-fab>
 
     <ion-list padding>
-        <ion-card *ngFor="let person of user | sort | search:search | filter:filter" (press)="presentActionSheet(person._id)">
+        <ion-card *ngFor="let person of user | sort | search:search | filter:filter" (press)="presentActionSheet(person._id, person.lastName, person.firstName)">
             <ion-card-header>
                 {{person.lastName}} {{person.firstName}} ({{person.children}})
             </ion-card-header>

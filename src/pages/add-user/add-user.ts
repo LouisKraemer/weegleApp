@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { UserServiceProvider } from '../../providers/user-service/user-service';
+import { Events } from 'ionic-angular';
 
 /**
  * Generated class for the AddUserPage page.
@@ -34,16 +35,16 @@ export class AddUserPage {
         children: "0"
     }
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public userService: UserServiceProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public userService: UserServiceProvider, public events: Events) {
   }
 
     addUser() {
         this.userService.addUser(this.newUser).then((result) => {
-            console.log(result);
+            this.events.publish('addedUser', this.newUser.lastName, this.newUser.firstName)
+            this.navCtrl.pop();
         }, (err) => {
             console.log(err);
         })
-        this.navCtrl.pop();
     }
 
   ionViewDidLoad() {

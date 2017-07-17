@@ -4,6 +4,8 @@ import { UserServiceProvider } from '../../providers/user-service/user-service';
 import { AddUserPage } from '../add-user/add-user';
 import { ModifyModalPage } from '../modify-modal/modify-modal';
 import { Platform, ActionSheetController, ModalController } from 'ionic-angular';
+import { Events } from 'ionic-angular';
+import { ToastController } from 'ionic-angular';
 
 @Component({
     selector: 'page-home',
@@ -16,13 +18,40 @@ export class HomePage {
     search = "";
     filter = "all";
 
-  constructor(public navCtrl: NavController, public userService: UserServiceProvider, public actionSheetCtrl: ActionSheetController, public platform: Platform, public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController, public userService: UserServiceProvider, public actionSheetCtrl: ActionSheetController, public platform: Platform, public modalCtrl: ModalController, public events: Events, private toastCtrl: ToastController) {
+      events.subscribe('addedUser', (lastName, firstName) => {
+          this.getUsers();
+          this.presentToast('add', lastName, firstName);
+      });
+      events.subscribe('modifiedUser', (lastName, firstName) => {
+          this.getUsers();
+          this.presentToast('modify', lastName, firstName);
+      })
       this.getUsers();
   }
     
-    ionViewDidLoad() {
-        this.getUsers();
-  }
+//    ionViewDidLoad() {
+//        this.getUsers();
+//  }
+    
+    presentToast(action, lastName, firstName) {
+        let message = '';
+        if(action == 'add') {
+            message = lastName + ' ' + firstName + ' a été invité'
+        } else if (action == 'modify') {
+            message = lastName + ' ' + firstName + ' a été modifié'
+        } else {
+            message = lastName + ' ' + firstName + ' a été supprimé'
+        }
+        
+        let toast = this.toastCtrl.create({
+            message: message,
+            duration: 3000,
+            position: 'top'
+        });
+        
+        toast.present();
+    }
     
     getUsers() {
         this.userService.getUsers()
@@ -59,7 +88,7 @@ export class HomePage {
         userModal.present();
     }
     
-    presentActionSheet(targetId) {
+    presentActionSheet(targetId, lastName, firstName) {
         let actionSheet = this.actionSheetCtrl.create({
             title: 'Que voulez-vous faire ?',
             buttons: [
@@ -70,6 +99,7 @@ export class HomePage {
                 handler: () => {
                     this.userService.deleteUser(targetId).then(result => {
                         this.getUsers();
+                        this.presentToast('delete', lastName, firstName);
                     });
                 }
             },

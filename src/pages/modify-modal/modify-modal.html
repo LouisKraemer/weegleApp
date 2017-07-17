@@ -6,8 +6,9 @@
 -->
 <ion-header>
 
-    <ion-navbar>
-        <ion-title>Modifier un invité</ion-title>
+    <ion-navbar color="primary">
+        <ion-buttons end><button ion-button (click)="closeModal()">Annuler</button></ion-buttons>
+        <ion-title start>Modifier un invité</ion-title>
     </ion-navbar>
 
 </ion-header>
@@ -39,7 +40,7 @@
         </ion-item>
     </ion-list>
     <ion-list no-lines>
-        <ion-list-header>Invité à</ion-list-header>
+        <ion-list-header><ion-label color="primary">Invité à</ion-label></ion-list-header>
         <ion-item>
             <ion-label>Apéritif</ion-label>
             <ion-toggle [(ngModel)]="modifiedUser.apero.invited" name="aperoInvited"></ion-toggle>
@@ -54,7 +55,7 @@
         </ion-item>
     </ion-list>
     <ion-list no-lines *ngIf="modifiedUser.apero.invited || modifiedUser.meal.invited || modifiedUser.brunch.invited">
-        <ion-list-header>Vient à</ion-list-header>
+        <ion-list-header><ion-label color="primary">Vient à</ion-label></ion-list-header>
         <ion-item *ngIf=modifiedUser.apero.invited>
             <ion-label>Apéritif</ion-label>
             <ion-toggle [(ngModel)]="modifiedUser.apero.coming" name="aperoComing"></ion-toggle>
