@@ -12,37 +12,61 @@
 </ion-header>
 
 <ion-content>
-    <ion-refresher (ionRefresh)="doRefresh($event)">
-        <ion-refresher-content></ion-refresher-content>
-    </ion-refresher>
     <ion-fab bottom right>
         <button ion-fab (click)="addClicked()" color="danger"><ion-icon name="add"></ion-icon></button>
     </ion-fab>
 
-    <ion-list padding>
-        <ion-card *ngFor="let person of user | sort | search:search | filter:filter" (press)="presentActionSheet(person._id, person.lastName, person.firstName)">
-            <ion-card-header>
-                {{person.lastName}} {{person.firstName}} ({{person.children}})
-            </ion-card-header>
-            <ion-card-content>
-                <ion-item>
-                    <ion-icon *ngIf="person.coming; else cancelIcon" name="checkmark"></ion-icon>
-                    <ng-template #cancelIcon>
-                        <ion-icon name="close"></ion-icon>
-                    </ng-template>
-                    <ion-note item-end>
-                        <ion-icon *ngIf="person.apero.invited && person.apero.coming" name="radio-button-on"></ion-icon>
-                        <ion-icon *ngIf="person.apero.invited && !person.apero.coming" name="radio-button-off"></ion-icon>
-                        <ion-icon *ngIf="!person.apero.invited" name="remove"></ion-icon>
-                        <ion-icon *ngIf="person.meal.invited && person.meal.coming" name="radio-button-on"></ion-icon>
-                        <ion-icon *ngIf="person.meal.invited && !person.meal.coming" name="radio-button-off"></ion-icon>
-                        <ion-icon *ngIf="!person.meal.invited" name="remove"></ion-icon>
-                        <ion-icon *ngIf="person.brunch.invited && person.brunch.coming" name="radio-button-on"></ion-icon>
-                        <ion-icon *ngIf="person.brunch.invited && !person.brunch.coming" name="radio-button-off"></ion-icon>
-                        <ion-icon *ngIf="!person.brunch.invited" name="remove"></ion-icon>
-                    </ion-note>
-                </ion-item>
-            </ion-card-content>
-        </ion-card>
-    </ion-list>
+  <ion-list padding>
+    <ion-card *ngFor="let person of users | async | sort | search:search | filter:filter" (press)="presentActionSheet(person)">
+      <ion-card-header>
+        {{person.lastName}} {{person.firstName}} ({{person.children}})
+      </ion-card-header>
+      <ion-card-content>
+        <ion-item>
+          <ion-icon *ngIf="person.coming; else cancelIcon" name="checkmark"></ion-icon>
+          <ng-template #cancelIcon>
+            <ion-icon name="close"></ion-icon>
+          </ng-template>
+          <ion-note item-end>
+            <ion-icon *ngIf="person.apero.invited && person.apero.coming" name="radio-button-on"></ion-icon>
+            <ion-icon *ngIf="person.apero.invited && !person.apero.coming" name="radio-button-off"></ion-icon>
+            <ion-icon *ngIf="!person.apero.invited" name="remove"></ion-icon>
+            <ion-icon *ngIf="person.meal.invited && person.meal.coming" name="radio-button-on"></ion-icon>
+            <ion-icon *ngIf="person.meal.invited && !person.meal.coming" name="radio-button-off"></ion-icon>
+            <ion-icon *ngIf="!person.meal.invited" name="remove"></ion-icon>
+            <ion-icon *ngIf="person.brunch.invited && person.brunch.coming" name="radio-button-on"></ion-icon>
+            <ion-icon *ngIf="person.brunch.invited && !person.brunch.coming" name="radio-button-off"></ion-icon>
+            <ion-icon *ngIf="!person.brunch.invited" name="remove"></ion-icon>
+          </ion-note>
+        </ion-item>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+
+    <!--<ion-list padding>-->
+        <!--<ion-card *ngFor="let person of user | sort | search:search | filter:filter" (press)="presentActionSheet(person._id, person.lastName, person.firstName)">-->
+            <!--<ion-card-header>-->
+                <!--{{person.lastName}} {{person.firstName}} ({{person.children}})-->
+            <!--</ion-card-header>-->
+            <!--<ion-card-content>-->
+                <!--<ion-item>-->
+                    <!--<ion-icon *ngIf="person.coming; else cancelIcon" name="checkmark"></ion-icon>-->
+                    <!--<ng-template #cancelIcon>-->
+                        <!--<ion-icon name="close"></ion-icon>-->
+                    <!--</ng-template>-->
+                    <!--<ion-note item-end>-->
+                        <!--<ion-icon *ngIf="person.apero.invited && person.apero.coming" name="radio-button-on"></ion-icon>-->
+                        <!--<ion-icon *ngIf="person.apero.invited && !person.apero.coming" name="radio-button-off"></ion-icon>-->
+                        <!--<ion-icon *ngIf="!person.apero.invited" name="remove"></ion-icon>-->
+                        <!--<ion-icon *ngIf="person.meal.invited && person.meal.coming" name="radio-button-on"></ion-icon>-->
+                        <!--<ion-icon *ngIf="person.meal.invited && !person.meal.coming" name="radio-button-off"></ion-icon>-->
+                        <!--<ion-icon *ngIf="!person.meal.invited" name="remove"></ion-icon>-->
+                        <!--<ion-icon *ngIf="person.brunch.invited && person.brunch.coming" name="radio-button-on"></ion-icon>-->
+                        <!--<ion-icon *ngIf="person.brunch.invited && !person.brunch.coming" name="radio-button-off"></ion-icon>-->
+                        <!--<ion-icon *ngIf="!person.brunch.invited" name="remove"></ion-icon>-->
+                    <!--</ion-note>-->
+                <!--</ion-item>-->
+            <!--</ion-card-content>-->
+        <!--</ion-card>-->
+    <!--</ion-list>-->
 </ion-content>

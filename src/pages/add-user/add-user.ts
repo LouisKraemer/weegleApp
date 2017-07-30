@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {IonicPage, NavController, ToastController} from 'ionic-angular';
 import { UserServiceProvider } from '../../providers/user-service/user-service';
 import { Events } from 'ionic-angular';
 
@@ -35,16 +35,21 @@ export class AddUserPage {
         children: "0"
     }
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public userService: UserServiceProvider, public events: Events) {
+  constructor(public navCtrl: NavController, public userService: UserServiceProvider, public toastCtrl: ToastController) {
   }
 
     addUser() {
-        this.userService.addUser(this.newUser).then((result) => {
-            this.events.publish('addedUser', this.newUser.lastName, this.newUser.firstName)
-            this.navCtrl.pop();
-        }, (err) => {
-            console.log(err);
-        })
+      this.userService.addUser(this.newUser).then(_ => {
+        let toast = this.toastCtrl.create({
+          message: this.newUser.lastName + " " + this.newUser.firstName + " a été invité",
+          duration: 3000,
+          position: 'top'
+        });
+
+        toast.present();
+
+        this.navCtrl.pop();
+      })
     }
 
   ionViewDidLoad() {

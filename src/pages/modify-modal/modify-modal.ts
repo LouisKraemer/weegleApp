@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {IonicPage, NavParams, ToastController} from 'ionic-angular';
 import { UserServiceProvider } from '../../providers/user-service/user-service';
 import { ViewController } from 'ionic-angular';
 import { Events } from 'ionic-angular';
@@ -11,7 +11,6 @@ import { Events } from 'ionic-angular';
 })
 export class ModifyModalPage {
     modifiedUser = {
-        _id: "",
         lastName: "",
         firstName: "",
         coming: false,
@@ -29,36 +28,34 @@ export class ModifyModalPage {
         },
         children: ""
     }
+    private userKey: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public userService: UserServiceProvider, public viewCtrl: ViewController, public events: Events) {
+  constructor(public toastCtrl: ToastController, public navParams: NavParams, public userService: UserServiceProvider, public viewCtrl: ViewController, public events: Events) {
       this.modifiedUser = {
-          _id: navParams.get('userId'),
         lastName: navParams.get('lastName'),
         firstName: navParams.get('firstName'),
         coming: navParams.get('coming'),
-        apero: {
-            invited: navParams.get('aperoInvited'),
-            coming: navParams.get('aperoComing')
-        },
-        meal: {
-            invited: navParams.get('mealInvited'),
-            coming: navParams.get('mealComing')
-        },
-        brunch: {
-            invited: navParams.get('brunchInvited'),
-            coming: navParams.get('brunchComing')
-        },
+        apero: navParams.get('apero'),
+        meal: navParams.get('meal'),
+        brunch: navParams.get('brunch'),
         children: navParams.get('children')
     }
+    this.userKey = navParams.get('$key')
   }
-    
+
     updateUser() {
-        this.userService.modifyUser(this.modifiedUser);
-        this.events.publish('modifiedUser', this.modifiedUser.lastName, this.modifiedUser.firstName);
+      this.userService.modifyUser(this.modifiedUser, this.userKey).then(_ => {
+        let toast = this.toastCtrl.create({
+          message: this.modifiedUser.lastName + " " + this.modifiedUser.firstName + " a été modifié",
+          duration: 3000,
+          position: 'top'
+        });
+
+        toast.present();
         this.viewCtrl.dismiss();
-        
+      })
     }
-    
+
     closeModal() {
         this.viewCtrl.dismiss();
     }
