@@ -1,5 +1,8 @@
 {
   "name": "weegleApp",
   "app_id": "271013f7",
-  "type": "ionic-angular"
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
 }
