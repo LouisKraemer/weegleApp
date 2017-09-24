@@ -26,7 +26,10 @@ export class ModifyModalPage {
             invited: false,
             coming: false
         },
-        children: ""
+        children: "",
+        couple: false,
+        secondLastName: "",
+        secondFirstName: ""
     }
     private userKey: string;
 
@@ -38,7 +41,10 @@ export class ModifyModalPage {
         apero: navParams.get('apero'),
         meal: navParams.get('meal'),
         brunch: navParams.get('brunch'),
-        children: navParams.get('children')
+        children: navParams.get('children'),
+        couple: navParams.get('couple'),
+        secondLastName: navParams.get('secondLastName'),
+        secondFirstName: this.navParams.get('secondFirstName')
     }
     this.userKey = navParams.get('$key')
   }
@@ -46,7 +52,8 @@ export class ModifyModalPage {
     updateUser() {
       this.userService.modifyUser(this.modifiedUser, this.userKey).then(_ => {
         let toast = this.toastCtrl.create({
-          message: this.modifiedUser.lastName + " " + this.modifiedUser.firstName + " a été modifié",
+          message: this.modifiedUser.lastName + " " + this.modifiedUser.firstName + (!this.modifiedUser.couple ? " a été modifié" :
+            " et " + this.modifiedUser.secondLastName + " " + this.modifiedUser.secondFirstName + " ont été modifié"),
           duration: 3000,
           position: 'top'
         });

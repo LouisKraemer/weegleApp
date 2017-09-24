@@ -41,6 +41,7 @@ export class StatsPage {
         this.brunchComingCount = 0;
         this.childrenCount = 0;
         for(let user of data) {
+          user.couple ? this.userCount+=2 : this.userCount++;
           if (user.answered) {
             this.answerCount++;
             if (user.coming) {

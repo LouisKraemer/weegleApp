@@ -18,8 +18,11 @@
 
   <ion-list padding>
     <ion-card *ngFor="let person of users | async | sort | search:search | filter:filter" (press)="presentActionSheet(person)">
-      <ion-card-header>
+      <ion-card-header *ngIf="!person.couple">
         {{person.lastName}} {{person.firstName}} ({{person.children}})
+      </ion-card-header>
+      <ion-card-header *ngIf="person.couple">
+        {{person.lastName}} {{person.firstName}} et {{person.secondLastName}} {{person.secondFirstName}} ({{person.children}})
       </ion-card-header>
       <ion-card-content>
         <ion-item>

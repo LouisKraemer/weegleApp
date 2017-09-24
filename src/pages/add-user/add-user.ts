@@ -32,7 +32,10 @@ export class AddUserPage {
             invited: false,
             coming: false
         },
-        children: "0"
+        children: "0",
+        couple: false,
+        secondLastName: "",
+        secondFirstName: ""
     }
 
   constructor(public navCtrl: NavController, public userService: UserServiceProvider, public toastCtrl: ToastController) {
@@ -41,7 +44,8 @@ export class AddUserPage {
     addUser() {
       this.userService.addUser(this.newUser).then(_ => {
         let toast = this.toastCtrl.create({
-          message: this.newUser.lastName + " " + this.newUser.firstName + " a été invité",
+          message: this.newUser.lastName + " " + this.newUser.firstName + (!this.newUser.couple ? " a été invité" :
+          " et " + this.newUser.secondLastName + " " + this.newUser.secondFirstName + " ont été invité"),
           duration: 3000,
           position: 'top'
         });

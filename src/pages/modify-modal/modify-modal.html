@@ -24,6 +24,18 @@
             <ion-label color="primary" floating>Prénom</ion-label>
             <ion-input [(ngModel)]="modifiedUser.firstName" name="firstName"></ion-input>
         </ion-item>
+      <ion-item>
+        <ion-label>Vient en couple</ion-label>
+        <ion-toggle [(ngModel)]="modifiedUser.couple" name="couple"></ion-toggle>
+      </ion-item>
+      <ion-item *ngIf="modifiedUser.couple">
+        <ion-label color="primary" floating>Nom</ion-label>
+        <ion-input [(ngModel)]="modifiedUser.secondLastName" name="secondLastName"></ion-input>
+      </ion-item>
+      <ion-item  *ngIf="modifiedUser.couple">
+        <ion-label color="primary" floating>Prénom</ion-label>
+        <ion-input [(ngModel)]="modifiedUser.secondFirstName" name="secondFirstName"></ion-input>
+      </ion-item>
         <ion-item>
             <ion-label>Vient</ion-label>
             <ion-toggle [(ngModel)]="modifiedUser.coming" name="coming"></ion-toggle>
