@@ -32,7 +32,7 @@ export class AddUserPage {
             invited: false,
             coming: false
         },
-        children: "0",
+        children: 0,
         couple: false,
         secondLastName: "",
         secondFirstName: ""
