@@ -42,6 +42,7 @@ export class AddUserPage {
   }
 
     addUser() {
+      this.newUser.children = Number(this.newUser.children)
       this.userService.addUser(this.newUser).then(_ => {
         let toast = this.toastCtrl.create({
           message: this.newUser.lastName + " " + this.newUser.firstName + (!this.newUser.couple ? " a été invité" :
