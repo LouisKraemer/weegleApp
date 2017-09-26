@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import {IonicPage, NavController, ToastController} from 'ionic-angular';
 import { UserServiceProvider } from '../../providers/user-service/user-service';
-import { Events } from 'ionic-angular';
 
 /**
  * Generated class for the AddUserPage page.
@@ -35,7 +34,8 @@ export class AddUserPage {
         children: 0,
         couple: false,
         secondLastName: "",
-        secondFirstName: ""
+        secondFirstName: "",
+        infos: ""
     }
 
   constructor(public navCtrl: NavController, public userService: UserServiceProvider, public toastCtrl: ToastController) {
